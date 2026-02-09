@@ -6,7 +6,7 @@
     <title>ComRats — Indie Game Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --red: #E31E24;
@@ -26,145 +26,6 @@
             background-color: var(--white);
             color: var(--black);
             overflow-x: hidden;
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 2rem;
-            z-index: 1000;
-            pointer-events: none;
-        }
-
-        .nav-toggle {
-            display: none;
-        }
-
-        .nav-label {
-            position: relative;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            pointer-events: all;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-label span {
-            display: block;
-            width: 100%;
-            height: 2px;
-            background: var(--black);
-            transition: all 0.4s ease;
-            transform-origin: center;
-        }
-
-        .nav-label:hover span {
-            background: var(--red);
-        }
-
-        .nav-toggle:checked + .nav-label span:nth-child(1) {
-            transform: rotate(45deg) translate(9px, 9px);
-            background: var(--red);
-        }
-
-        .nav-toggle:checked + .nav-label span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .nav-toggle:checked + .nav-label span:nth-child(3) {
-            transform: rotate(-45deg) translate(9px, -9px);
-            background: var(--red);
-        }
-
-        .nav-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--black);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-
-        .nav-toggle:checked ~ .nav-menu {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .nav-links {
-            list-style: none;
-            text-align: center;
-        }
-
-        .nav-links li {
-            margin: 2rem 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-
-        .nav-toggle:checked ~ .nav-menu .nav-links li {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .nav-toggle:checked ~ .nav-menu .nav-links li:nth-child(1) {
-            transition-delay: 0.1s;
-        }
-
-        .nav-toggle:checked ~ .nav-menu .nav-links li:nth-child(2) {
-            transition-delay: 0.2s;
-        }
-
-        .nav-toggle:checked ~ .nav-menu .nav-links li:nth-child(3) {
-            transition-delay: 0.3s;
-        }
-
-        .nav-toggle:checked ~ .nav-menu .nav-links li:nth-child(4) {
-            transition-delay: 0.4s;
-        }
-
-        .nav-links a {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(3rem, 8vw, 6rem);
-            color: var(--white);
-            text-decoration: none;
-            letter-spacing: 0.1em;
-            position: relative;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 4px;
-            background: var(--red);
-            transition: width 0.4s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--red);
-            transform: translateX(20px);
         }
 
         /* Hero Section */
@@ -497,6 +358,11 @@
             transition: all 0.3s ease;
         }
 
+        .member-name.fredoka {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+        }
+
         /* Footer */
         .footer {
             background: var(--black);
@@ -594,24 +460,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <label for="nav-toggle" class="nav-label">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <div class="nav-menu">
-            <ul class="nav-links">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#about">О нас</a></li>
-                <li><a href="#team">Команда</a></li>
-                <li><a href="#contact">Контакты</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="geo-element geo-1"></div>
@@ -647,7 +495,7 @@
                     <p class="member-number">// 01</p>
                 </div>
                 <div class="member">
-                    <h3 class="member-name">ANLYX</h3>
+                    <h3 class="member-name fredoka">ANLYX</h3>
                     <p class="member-number">// 02</p>
                 </div>
                 <div class="member">
