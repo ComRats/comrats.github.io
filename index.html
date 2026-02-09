@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComRats — Indie Game Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #E31E24;
+            --white: #FFFFFF;
+            --off-white: #F8F8F8;
+            --black: #0A0A0A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(5rem, 15vw, 12rem);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--black);
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--red);
+            animation: expand 1.5s ease-out;
+        }
+
+        @keyframes expand {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .tagline {
+            font-size: clamp(0.875rem, 2vw, 1.125rem);
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 3rem;
+        }
+
+        /* Geometric Background Elements */
+        .geo-element {
+            position: absolute;
+            border: 2px solid var(--red);
+        }
+
+        .geo-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 5%;
+            opacity: 0.3;
+            animation: rotate-slow 20s linear infinite;
+        }
+
+        .geo-2 {
+            width: 100px;
+            height: 100px;
+            bottom: 15%;
+            right: 8%;
+            opacity: 0.2;
+            animation: rotate-reverse 15s linear infinite;
+        }
+
+        .geo-3 {
+            width: 300px;
+            height: 1px;
+            background: var(--red);
+            top: 30%;
+            right: -50px;
+            transform: rotate(-45deg);
+            opacity: 0.2;
+        }
+
+        @keyframes rotate-slow {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotate-reverse {
+            from {
+                transform: rotate(360deg);
+            }
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        /* About Section */
+        .about {
+            background: var(--off-white);
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--red);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--black);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .about-text {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.8;
+            max-width: 800px;
+            font-weight: 300;
+        }
+
+        .highlight {
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 8rem 2rem;
+            background: var(--white);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .member {
+            text-align: center;
+            position: relative;
+            padding: 3rem 2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: width 0.4s ease;
+        }
+
+        .member::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: width 0.4s ease;
+        }
+
+        .member:hover::before,
+        .member:hover::after {
+            width: 100%;
+        }
+
+        .member:hover {
+            transform: translateY(-5px);
+        }
+
+        .member-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.1em;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .member-number {
+            font-size: 0.875rem;
+            color: var(--red);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            opacity: 0.6;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+        }
+
+        .red-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--red);
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .geo-element {
+                display: none;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about,
+            .team {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--red);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="geo-element geo-1"></div>
+        <div class="geo-element geo-2"></div>
+        <div class="geo-element geo-3"></div>
+        
+        <div class="hero-content">
+            <h1 class="logo">COMRATS</h1>
+            <p class="tagline">Indie Game Studio</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">О НАС</h2>
+            <p class="about-text">
+                Мы — <span class="highlight">ComRats</span>, команда разработчиков инди-игр. 
+                Создаём уникальные игровые миры на <span class="highlight">Unity</span>, 
+                где каждая деталь имеет значение. Наша миссия — превращать смелые идеи 
+                в незабываемые игровые впечатления.
+            </p>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">КОМАНДА</h2>
+            <div class="team-grid">
+                <div class="member">
+                    <h3 class="member-name">9IKII5EC</h3>
+                    <p class="member-number">// 01</p>
+                </div>
+                <div class="member">
+                    <h3 class="member-name">ANLYX</h3>
+                    <p class="member-number">// 02</p>
+                </div>
+                <div class="member">
+                    <h3 class="member-name">IRSHINO</h3>
+                    <p class="member-number">// 03</p>
+                </div>
+                <div class="member">
+                    <h3 class="member-name">G1NGER</h3>
+                    <p class="member-number">// 04</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">COMRATS</div>
+            <p class="footer-text">CRAFTING GAMES · BUILDING WORLDS · MAKING MEMORIES</p>
+            <div class="red-bar"></div>
+        </div>
+    </footer>
+</body>
+</html>
