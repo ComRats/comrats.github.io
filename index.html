@@ -28,6 +28,35 @@
             overflow-x: hidden;
         }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--white);
+            border-left: 1px solid var(--off-white);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--red);
+            transition: background 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--black);
+        }
+
+        ::-webkit-scrollbar-thumb:active {
+            background: var(--red);
+        }
+
+        /* Firefox Scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--red) var(--white);
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -495,7 +524,7 @@
                     <p class="member-number">// 01</p>
                 </div>
                 <div class="member">
-                    <h3 class="member-name fredoka">ANLYX</h3>
+                    <h3 class="member-name fredoka">ALNYX</h3>
                     <p class="member-number">// 02</p>
                 </div>
                 <div class="member">
