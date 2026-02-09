@@ -28,6 +28,145 @@
             overflow-x: hidden;
         }
 
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
+        .nav-label {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            pointer-events: all;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-label span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--black);
+            transition: all 0.4s ease;
+            transform-origin: center;
+        }
+
+        .nav-label:hover span {
+            background: var(--red);
+        }
+
+        .nav-toggle:checked + .nav-label span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+            background: var(--red);
+        }
+
+        .nav-toggle:checked + .nav-label span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle:checked + .nav-label span:nth-child(3) {
+            transform: rotate(-45deg) translate(9px, -9px);
+            background: var(--red);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .nav-toggle:checked ~ .nav-menu {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .nav-links {
+            list-style: none;
+            text-align: center;
+        }
+
+        .nav-links li {
+            margin: 2rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .nav-toggle:checked ~ .nav-menu .nav-links li {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-toggle:checked ~ .nav-menu .nav-links li:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .nav-toggle:checked ~ .nav-menu .nav-links li:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .nav-toggle:checked ~ .nav-menu .nav-links li:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .nav-toggle:checked ~ .nav-menu .nav-links li:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .nav-links a {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: var(--red);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+            transform: translateX(20px);
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -65,6 +204,20 @@
             height: 6px;
             background: var(--red);
             animation: expand 1.5s ease-out;
+            transition: height 0.3s ease;
+        }
+
+        .logo:hover::after {
+            height: 12px;
+        }
+
+        .logo {
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+            letter-spacing: 0.08em;
         }
 
         @keyframes expand {
@@ -83,6 +236,11 @@
             text-transform: uppercase;
             color: var(--red);
             margin-bottom: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .tagline:hover {
+            letter-spacing: 0.4em;
         }
 
         /* Geometric Background Elements */
@@ -98,6 +256,14 @@
             left: 5%;
             opacity: 0.3;
             animation: rotate-slow 20s linear infinite;
+            transition: all 0.5s ease;
+        }
+
+        .geo-1:hover {
+            opacity: 0.6;
+            border-color: var(--red);
+            border-width: 3px;
+            animation-play-state: paused;
         }
 
         .geo-2 {
@@ -107,6 +273,14 @@
             right: 8%;
             opacity: 0.2;
             animation: rotate-reverse 15s linear infinite;
+            transition: all 0.5s ease;
+        }
+
+        .geo-2:hover {
+            opacity: 0.5;
+            border-color: var(--red);
+            border-width: 3px;
+            animation-play-state: paused;
         }
 
         .geo-3 {
@@ -117,6 +291,12 @@
             right: -50px;
             transform: rotate(-45deg);
             opacity: 0.2;
+            transition: all 0.5s ease;
+        }
+
+        .geo-3:hover {
+            opacity: 0.5;
+            height: 2px;
         }
 
         @keyframes rotate-slow {
@@ -152,6 +332,11 @@
             width: 4px;
             height: 100%;
             background: var(--red);
+            transition: width 0.5s ease;
+        }
+
+        .about:hover::before {
+            width: 8px;
         }
 
         .container {
@@ -165,6 +350,28 @@
             color: var(--black);
             margin-bottom: 2rem;
             letter-spacing: 0.05em;
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--red);
+            transition: width 0.5s ease;
+        }
+
+        .section-title:hover::after {
+            width: 100%;
+        }
+
+        .section-title:hover {
+            letter-spacing: 0.08em;
         }
 
         .about-text {
@@ -172,11 +379,38 @@
             line-height: 1.8;
             max-width: 800px;
             font-weight: 300;
+            transition: all 0.3s ease;
+        }
+
+        .about-text:hover {
+            transform: translateX(10px);
         }
 
         .highlight {
             color: var(--red);
             font-weight: 700;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: width 0.3s ease;
+        }
+
+        .highlight:hover::after {
+            width: 100%;
+        }
+
+        .highlight:hover {
+            letter-spacing: 0.05em;
         }
 
         /* Team Section */
@@ -197,7 +431,8 @@
             position: relative;
             padding: 3rem 2rem;
             border: 2px solid transparent;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
         }
 
         .member::before {
@@ -228,7 +463,21 @@
         }
 
         .member:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            background: var(--off-white);
+        }
+
+        .member:hover .member-name {
+            color: var(--red);
+            letter-spacing: 0.15em;
+        }
+
+        .member:hover .member-number {
+            transform: translateX(5px);
+        }
+
+        .member:active {
+            transform: translateY(-5px) scale(0.98);
         }
 
         .member-name {
@@ -237,6 +486,7 @@
             letter-spacing: 0.1em;
             color: var(--black);
             margin-bottom: 0.5rem;
+            transition: all 0.4s ease;
         }
 
         .member-number {
@@ -244,6 +494,7 @@
             color: var(--red);
             font-weight: 700;
             letter-spacing: 0.2em;
+            transition: all 0.3s ease;
         }
 
         /* Footer */
@@ -266,6 +517,31 @@
             letter-spacing: 0.1em;
             margin-bottom: 2rem;
             color: var(--white);
+            transition: all 0.4s ease;
+            cursor: default;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-logo:hover {
+            letter-spacing: 0.2em;
+            color: var(--red);
+        }
+
+        .footer-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: width 0.4s ease;
+        }
+
+        .footer-logo:hover::after {
+            width: 100%;
         }
 
         .footer-text {
@@ -280,6 +556,12 @@
             height: 4px;
             background: var(--red);
             margin-top: 3rem;
+            transition: all 0.4s ease;
+        }
+
+        .red-bar:hover {
+            height: 8px;
+            background: linear-gradient(90deg, var(--red) 0%, var(--black) 100%);
         }
 
         /* Responsive */
@@ -312,8 +594,26 @@
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <div class="nav-menu">
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#team">Команда</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="geo-element geo-1"></div>
         <div class="geo-element geo-2"></div>
         <div class="geo-element geo-3"></div>
@@ -325,11 +625,11 @@
     </section>
 
     <!-- About Section -->
-    <section class="about">
+    <section class="about" id="about">
         <div class="container">
             <h2 class="section-title">О НАС</h2>
             <p class="about-text">
-                <span class="highlight">ComRats</span> — команда разработчиков инди-игр. 
+                Мы — <span class="highlight">ComRats</span>, команда разработчиков инди-игр. 
                 Создаём уникальные игровые миры на <span class="highlight">Unity</span>, 
                 где каждая деталь имеет значение. Наша миссия — превращать смелые идеи 
                 в незабываемые игровые впечатления.
@@ -338,7 +638,7 @@
     </section>
 
     <!-- Team Section -->
-    <section class="team">
+    <section class="team" id="team">
         <div class="container">
             <h2 class="section-title">КОМАНДА</h2>
             <div class="team-grid">
@@ -363,7 +663,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="contact">
         <div class="footer-content">
             <div class="footer-logo">COMRATS</div>
             <p class="footer-text">CRAFTING GAMES · BUILDING WORLDS · MAKING MEMORIES</p>
