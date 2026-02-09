@@ -6,13 +6,11 @@
     <title>ComRats — Indie Game Studio</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Unbounded:wght@200;300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
-
         *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         :root {
             --white: #ffffff;
             --off-white: #fafafa;
@@ -26,9 +24,7 @@
             --gray-light: #e8e8e8;
             --border: #e0e0e0;
         }
-
         html { scroll-behavior: smooth; }
-
         body {
             font-family: 'DM Sans', sans-serif;
             color: var(--dark);
@@ -36,9 +32,7 @@
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
-
         /* ═══════════ NAV ═══════════ */
-
         nav {
             position: fixed;
             top: 0;
@@ -50,7 +44,6 @@
             -webkit-backdrop-filter: blur(24px);
             border-bottom: 1px solid var(--gray-light);
         }
-
         .nav-inner {
             max-width: 1340px;
             margin: 0 auto;
@@ -60,7 +53,6 @@
             align-items: center;
             justify-content: space-between;
         }
-
         .logo {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
@@ -72,7 +64,6 @@
             gap: 10px;
             letter-spacing: -0.5px;
         }
-
         .logo-mark {
             width: 32px;
             height: 32px;
@@ -87,13 +78,11 @@
             font-weight: 700;
             letter-spacing: 0;
         }
-
         .nav-links {
             display: flex;
             gap: 40px;
             list-style: none;
         }
-
         .nav-links a {
             text-decoration: none;
             color: var(--gray);
@@ -103,11 +92,8 @@
             letter-spacing: 0.5px;
             transition: color 0.3s;
         }
-
         .nav-links a:hover { color: var(--dark); }
-
         /* ═══════════ HERO ═══════════ */
-
         .hero {
             min-height: 100vh;
             display: flex;
@@ -116,7 +102,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .hero-circle {
             position: absolute;
             width: 600px;
@@ -127,7 +112,6 @@
             right: -100px;
             transform: translateY(-50%);
         }
-
         .hero-circle-2 {
             position: absolute;
             width: 400px;
@@ -138,7 +122,6 @@
             right: 0;
             transform: translateY(-50%);
         }
-
         .hero-content {
             max-width: 1340px;
             margin: 0 auto;
@@ -146,7 +129,6 @@
             position: relative;
             z-index: 1;
         }
-
         .hero-eyebrow {
             font-family: 'Space Mono', monospace;
             font-size: 0.7rem;
@@ -158,13 +140,11 @@
             align-items: center;
             gap: 12px;
         }
-
         .hero-eyebrow-line {
             width: 40px;
             height: 1px;
             background: var(--mint);
         }
-
         .hero-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(3.5rem, 8vw, 7.5rem);
@@ -174,12 +154,10 @@
             margin-bottom: 16px;
             max-width: 900px;
         }
-
         .hero-title em {
             font-style: italic;
             color: var(--mint-deep);
         }
-
         .hero-title-bold {
             font-family: 'Unbounded', sans-serif;
             font-weight: 800;
@@ -189,7 +167,6 @@
             line-height: 1.1;
             margin-top: 4px;
         }
-
         .hero-desc {
             font-family: 'DM Sans', sans-serif;
             font-size: 1.1rem;
@@ -199,7 +176,6 @@
             line-height: 1.8;
             margin: 40px 0 48px;
         }
-
         .hero-cta {
             display: inline-flex;
             align-items: center;
@@ -214,12 +190,10 @@
             border-bottom: 1.5px solid var(--dark);
             transition: color 0.3s, border-color 0.3s;
         }
-
         .hero-cta:hover {
             color: var(--mint-deep);
             border-color: var(--mint-deep);
         }
-
         .hero-scroll {
             position: absolute;
             bottom: 48px;
@@ -234,15 +208,12 @@
             align-items: center;
             gap: 12px;
         }
-
         .hero-scroll-line {
             width: 1px;
             height: 48px;
             background: var(--gray-light);
         }
-
         /* ═══════════ MARQUEE ═══════════ */
-
         .marquee-wrap {
             border-top: 1px solid var(--gray-light);
             border-bottom: 1px solid var(--gray-light);
@@ -250,13 +221,11 @@
             padding: 28px 0;
             background: var(--off-white);
         }
-
         .marquee-track {
             display: flex;
             width: max-content;
             animation: marquee 25s linear infinite;
         }
-
         .marquee-item {
             font-family: 'Unbounded', sans-serif;
             font-size: 0.75rem;
@@ -267,26 +236,20 @@
             letter-spacing: 4px;
             text-transform: uppercase;
         }
-
         .marquee-item .sep {
             color: var(--mint);
             margin: 0 16px;
         }
-
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-
         /* ═══════════ SECTION BASE ═══════════ */
-
         section { padding: 140px 48px; }
-
         .container {
             max-width: 1340px;
             margin: 0 auto;
         }
-
         .section-label {
             font-family: 'Space Mono', monospace;
             font-size: 0.65rem;
@@ -295,7 +258,6 @@
             color: var(--mint-deep);
             margin-bottom: 12px;
         }
-
         .section-heading {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.2rem, 4.5vw, 3.8rem);
@@ -304,16 +266,13 @@
             line-height: 1.15;
             margin-bottom: 20px;
         }
-
         .section-heading strong {
             font-family: 'Syne', sans-serif;
             font-weight: 800;
         }
-
         .section-heading em {
             font-style: italic;
         }
-
         .section-sub {
             font-family: 'DM Sans', sans-serif;
             font-weight: 300;
@@ -322,14 +281,11 @@
             max-width: 500px;
             line-height: 1.8;
         }
-
         /* ═══════════ ABOUT ═══════════ */
-
         .about {
             background: var(--off-white);
             border-top: 1px solid var(--gray-light);
         }
-
         .about-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -337,7 +293,6 @@
             margin-top: 72px;
             align-items: start;
         }
-
         .about-text p {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.35rem;
@@ -346,22 +301,18 @@
             color: var(--dark);
             margin-bottom: 24px;
         }
-
         .about-text p:last-child { margin-bottom: 0; }
-
         .about-stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
         }
-
         .stat {
             padding: 40px 32px;
             border: 1px solid var(--border);
             border-radius: 20px;
             background: var(--white);
         }
-
         .stat-value {
             font-family: 'Unbounded', sans-serif;
             font-size: 2.2rem;
@@ -369,9 +320,7 @@
             color: var(--dark);
             margin-bottom: 10px;
         }
-
         .stat-value.mint { color: var(--mint-deep); }
-
         .stat-text {
             font-family: 'Outfit', sans-serif;
             font-size: 0.8rem;
@@ -380,9 +329,7 @@
             letter-spacing: 0.3px;
             line-height: 1.5;
         }
-
         /* ═══════════ SERVICES ═══════════ */
-
         .services-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -392,15 +339,12 @@
             border-radius: 24px;
             overflow: hidden;
         }
-
         .srv {
             background: var(--white);
             padding: 56px 44px;
             transition: background 0.3s;
         }
-
         .srv:hover { background: var(--mint-pale); }
-
         .srv-num {
             font-family: 'Space Mono', monospace;
             font-size: 0.65rem;
@@ -408,7 +352,6 @@
             letter-spacing: 3px;
             margin-bottom: 32px;
         }
-
         .srv h3 {
             font-family: 'Syne', sans-serif;
             font-size: 1.35rem;
@@ -416,7 +359,6 @@
             margin-bottom: 16px;
             letter-spacing: -0.5px;
         }
-
         .srv p {
             font-family: 'DM Sans', sans-serif;
             font-size: 0.92rem;
@@ -424,7 +366,6 @@
             color: var(--gray);
             line-height: 1.75;
         }
-
         .srv-icon {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
@@ -433,27 +374,20 @@
             margin-bottom: 24px;
             line-height: 1;
         }
-
         /* ═══════════ TEAM ═══════════ */
-
         .team-section {
             background: var(--dark);
             color: var(--white);
         }
-
         .team-section .section-label { color: var(--mint); }
-
         .team-section .section-heading { color: var(--white); }
-
         .team-section .section-sub { color: rgba(255,255,255,0.4); }
-
         .team-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 24px;
             margin-top: 72px;
         }
-
         .member {
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 24px;
@@ -461,12 +395,10 @@
             text-align: center;
             transition: border-color 0.3s, background 0.3s;
         }
-
         .member:hover {
             border-color: var(--mint);
             background: rgba(126,202,181,0.05);
         }
-
         .member-ava {
             width: 96px;
             height: 96px;
@@ -483,7 +415,6 @@
             border: 1px solid rgba(255,255,255,0.1);
             position: relative;
         }
-
         .member-ava::after {
             content: '';
             position: absolute;
@@ -495,7 +426,6 @@
             border-radius: 50%;
             border: 2px solid var(--dark);
         }
-
         .member-name {
             font-family: 'Space Mono', monospace;
             font-size: 1rem;
@@ -503,7 +433,6 @@
             margin-bottom: 8px;
             color: var(--white);
         }
-
         .member-role {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1rem;
@@ -511,15 +440,11 @@
             color: rgba(255,255,255,0.35);
             font-weight: 300;
         }
-
         /* ═══════════ PHILOSOPHY ═══════════ */
-
         .philosophy { background: var(--off-white); }
-
         .philosophy-items {
             margin-top: 72px;
         }
-
         .phil-item {
             display: grid;
             grid-template-columns: 120px 1fr 1fr;
@@ -528,11 +453,9 @@
             padding: 48px 0;
             border-bottom: 1px solid var(--border);
         }
-
         .phil-item:first-child {
             border-top: 1px solid var(--border);
         }
-
         .phil-num {
             font-family: 'Unbounded', sans-serif;
             font-size: 0.7rem;
@@ -540,7 +463,6 @@
             color: var(--mint);
             letter-spacing: 2px;
         }
-
         .phil-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
@@ -548,9 +470,7 @@
             line-height: 1.3;
             letter-spacing: -0.5px;
         }
-
         .phil-title em { font-style: italic; }
-
         .phil-desc {
             font-family: 'DM Sans', sans-serif;
             font-size: 0.92rem;
@@ -558,15 +478,12 @@
             color: var(--gray);
             line-height: 1.8;
         }
-
         /* ═══════════ QUOTE ═══════════ */
-
         .quote-section {
             padding: 140px 48px;
             text-align: center;
             border-top: 1px solid var(--gray-light);
         }
-
         .quote-mark {
             font-family: 'Playfair Display', serif;
             font-size: 5rem;
@@ -574,7 +491,6 @@
             line-height: 1;
             margin-bottom: 20px;
         }
-
         .quote-text {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(1.6rem, 3vw, 2.6rem);
@@ -585,7 +501,6 @@
             line-height: 1.5;
             color: var(--dark);
         }
-
         .quote-author {
             font-family: 'Outfit', sans-serif;
             font-size: 0.82rem;
@@ -593,9 +508,7 @@
             color: var(--gray-mid);
             letter-spacing: 1px;
         }
-
         /* ═══════════ TOOLS ═══════════ */
-
         .tools-bar {
             display: flex;
             justify-content: center;
@@ -605,7 +518,6 @@
             border-top: 1px solid var(--gray-light);
             border-bottom: 1px solid var(--gray-light);
         }
-
         .tool {
             font-family: 'Outfit', sans-serif;
             font-size: 0.8rem;
@@ -617,23 +529,19 @@
             align-items: center;
             gap: 10px;
         }
-
         .tool-dot {
             width: 6px;
             height: 6px;
             background: var(--mint-light);
             border-radius: 50%;
         }
-
         /* ═══════════ CONTACT ═══════════ */
-
         .contact {
             background: var(--dark);
             color: var(--white);
             text-align: center;
             padding: 160px 48px;
         }
-
         .contact-label {
             font-family: 'Space Mono', monospace;
             font-size: 0.65rem;
@@ -642,7 +550,6 @@
             color: var(--mint);
             margin-bottom: 28px;
         }
-
         .contact-heading {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 5vw, 4.5rem);
@@ -650,7 +557,6 @@
             margin-bottom: 8px;
             letter-spacing: -1px;
         }
-
         .contact-heading-bold {
             font-family: 'Unbounded', sans-serif;
             font-weight: 800;
@@ -659,7 +565,6 @@
             letter-spacing: -2px;
             margin-bottom: 20px;
         }
-
         .contact-sub {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.2rem;
@@ -668,14 +573,12 @@
             color: rgba(255,255,255,0.35);
             margin-bottom: 56px;
         }
-
         .contact-buttons {
             display: flex;
             gap: 14px;
             justify-content: center;
             flex-wrap: wrap;
         }
-
         .cbtn {
             display: inline-flex;
             align-items: center;
@@ -691,32 +594,26 @@
             letter-spacing: 0.5px;
             transition: all 0.3s;
         }
-
         .cbtn:hover {
             border-color: var(--mint);
             background: rgba(126,202,181,0.08);
         }
-
         .cbtn-primary {
             background: var(--mint);
             border-color: var(--mint);
             color: var(--dark);
             font-weight: 500;
         }
-
         .cbtn-primary:hover {
             background: var(--mint-deep);
             border-color: var(--mint-deep);
         }
-
         /* ═══════════ FOOTER ═══════════ */
-
         footer {
             background: var(--dark);
             border-top: 1px solid rgba(255,255,255,0.06);
             padding: 36px 48px;
         }
-
         .footer-inner {
             max-width: 1340px;
             margin: 0 auto;
@@ -724,31 +621,25 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .footer-l {
             font-family: 'Space Mono', monospace;
             font-size: 0.7rem;
             color: rgba(255,255,255,0.2);
         }
-
         .footer-c {
             font-family: 'Cormorant Garamond', serif;
             font-size: 0.95rem;
             font-style: italic;
             color: rgba(255,255,255,0.15);
         }
-
         .footer-c span { color: var(--mint); }
-
         .footer-r {
             font-family: 'Outfit', sans-serif;
             font-size: 0.7rem;
             color: rgba(255,255,255,0.2);
             letter-spacing: 1px;
         }
-
         /* ═══════════ RESPONSIVE ═══════════ */
-
         @media (max-width: 1024px) {
             .about-layout { grid-template-columns: 1fr; gap: 56px; }
             .services-row { grid-template-columns: 1fr; }
@@ -756,7 +647,6 @@
             .phil-item { grid-template-columns: 80px 1fr; }
             .phil-desc { grid-column: 2; }
         }
-
         @media (max-width: 768px) {
             section { padding: 100px 24px; }
             .nav-inner { padding: 0 24px; }
@@ -779,14 +669,12 @@
             footer { padding: 28px 24px; }
             .quote-section { padding: 100px 24px; }
         }
-
         @media (max-width: 480px) {
             .team-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-
 <!-- NAV -->
 <nav>
     <div class="nav-inner">
@@ -796,41 +684,36 @@
         </a>
         <ul class="nav-links">
             <li><a href="#about">О нас</a></li>
-            <li><a href="#services">Процесс</a></li>
+            <li><a href="#services">Как работаем</a></li>
             <li><a href="#team">Команда</a></li>
-            <li><a href="#philosophy">Философия</a></li>
-            <li><a href="#contact">Контакт</a></li>
+            <li><a href="#philosophy">Подход</a></li>
+            <li><a href="#contact">Контакты</a></li>
         </ul>
     </div>
 </nav>
-
 <!-- HERO -->
 <section class="hero">
     <div class="hero-circle"></div>
     <div class="hero-circle-2"></div>
-
     <div class="hero-scroll">
         <span class="hero-scroll-line"></span>
         scroll
     </div>
-
     <div class="hero-content">
         <div class="hero-eyebrow">
             <span class="hero-eyebrow-line"></span>
             Indie Game Studio
         </div>
         <h1 class="hero-title">
-            Создаём <em>игры,</em>
-            <span class="hero-title-bold">которые цепляют</span>
+            Делаем <em>игры</em>
+            <span class="hero-title-bold">на Unity</span>
         </h1>
         <p class="hero-desc">
-            Четверо энтузиастов. Один движок. Бесконечное количество идей.
-            Мы — ComRats, и мы делаем инди-игры на Unity.
+            Небольшая команда разработчиков. Работаем над проектами, которые нам самим интересны.
         </p>
-        <a href="#contact" class="hero-cta">Познакомиться ближе →</a>
+        <a href="#contact" class="hero-cta">Узнать больше →</a>
     </div>
 </section>
-
 <!-- MARQUEE -->
 <div class="marquee-wrap">
     <div class="marquee-track">
@@ -838,83 +721,79 @@
         <div class="marquee-item">ComRats <span class="sep">·</span> Unity <span class="sep">·</span> C# <span class="sep">·</span> Indie <span class="sep">·</span> Game Dev <span class="sep">·</span> Pixel Art <span class="sep">·</span> 2D <span class="sep">·</span> 3D <span class="sep">·</span> ComRats <span class="sep">·</span> Unity <span class="sep">·</span> C# <span class="sep">·</span> Indie <span class="sep">·</span> Game Dev <span class="sep">·</span> Pixel Art <span class="sep">·</span> 2D <span class="sep">·</span> 3D <span class="sep">·</span></div>
     </div>
 </div>
-
 <!-- ABOUT -->
 <section class="about" id="about">
     <div class="container">
         <div class="section-label">О нас</div>
-        <div class="section-heading">Четверо <em>мечтателей,</em><br><strong>один движок</strong></div>
+        <div class="section-heading">Кто мы <em>такие</em></div>
         <div class="about-layout">
             <div class="about-text">
-                <p>ComRats — это маленькая независимая студия, где каждый участник горит идеей создания игр. Мы верим, что размер команды не определяет масштаб идей.</p>
-                <p>Наш инструмент — Unity. Наше топливо — чай, пицца и бесконечные дискуссии о геймдизайне в три часа ночи. Мы создаём то, во что сами хотим играть.</p>
+                <p>ComRats — это четыре человека, которые разрабатывают игры на Unity. У нас нет офиса и менеджеров — только код, ассеты и регулярные созвоны.</p>
+                <p>Мы учимся на ходу, пробуем разные жанры и стараемся не затягивать релизы. Пока что всё делаем сами: от программирования до арта.</p>
             </div>
             <div class="about-stats-grid">
                 <div class="stat">
                     <div class="stat-value">4</div>
-                    <div class="stat-text">Участника<br>команды</div>
+                    <div class="stat-text">Человека<br>в команде</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value mint">∞</div>
-                    <div class="stat-text">Идей<br>в бэклоге</div>
+                    <div class="stat-value mint">Unity</div>
+                    <div class="stat-text">Основной<br>движок</div>
                 </div>
                 <div class="stat">
                     <div class="stat-value">C#</div>
-                    <div class="stat-text">Основной<br>язык</div>
+                    <div class="stat-text">Язык<br>разработки</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-value mint">24/7</div>
-                    <div class="stat-text">Режим<br>геймдева</div>
+                    <div class="stat-value mint">2D / 3D</div>
+                    <div class="stat-text">Форматы<br>проектов</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 <!-- SERVICES -->
 <section id="services">
     <div class="container">
-        <div class="section-label">Процесс</div>
-        <div class="section-heading">От <em>идеи</em> до <strong>релиза</strong></div>
-        <div class="section-sub">Каждая игра проходит через три ключевых этапа нашего пайплайна.</div>
+        <div class="section-label">Как работаем</div>
+        <div class="section-heading">Процесс <em>разработки</em></div>
+        <div class="section-sub">Стандартный цикл работы над проектом у нас выглядит так.</div>
         <div class="services-row">
             <div class="srv">
                 <div class="srv-num">001</div>
                 <div class="srv-icon">G</div>
-                <h3>Геймдизайн</h3>
-                <p>Прорабатываем концепт, механики, баланс и петли геймплея. Прототипируем быстро, итерируем часто.</p>
+                <h3>Дизайн</h3>
+                <p>Обсуждаем концепцию, прорабатываем механики и общую структуру. Делаем прототип, тестируем базовые идеи.</p>
             </div>
             <div class="srv">
                 <div class="srv-num">002</div>
                 <div class="srv-icon">A</div>
-                <h3>Арт и визуал</h3>
-                <p>Формируем визуальный язык проекта — от скетчей до финальных ассетов. Стиль, который запоминается.</p>
+                <h3>Визуал</h3>
+                <p>Определяемся со стилем, рисуем спрайты или моделим ассеты. Подбираем палитру и UI.</p>
             </div>
             <div class="srv">
                 <div class="srv-num">003</div>
                 <div class="srv-icon">D</div>
-                <h3>Разработка</h3>
-                <p>Пишем на C#, строим архитектуру в Unity, полируем каждую деталь до тех пор, пока не будет «вау».</p>
+                <h3>Код</h3>
+                <p>Пишем логику на C#, собираем всё в Unity, тестируем и фиксим баги до приемлемого состояния.</p>
             </div>
         </div>
     </div>
 </section>
-
 <!-- QUOTE -->
 <div class="quote-section">
     <div class="container">
         <div class="quote-mark">"</div>
-        <div class="quote-text">Если нам самим не хочется запускать нашу игру снова и снова — значит, она ещё не готова.</div>
-        <div class="quote-author">— COMRATS TEAM</div>
+        <div class="quote-text">Релиз игры — это когда мы перестаём находить критичные баги и начинаем находить их игроки.</div>
+        <div class="quote-author">— РЕАЛЬНОСТЬ РАЗРАБОТКИ</div>
     </div>
 </div>
-
 <!-- TEAM -->
 <section class="team-section" id="team">
     <div class="container">
         <div class="section-label">Команда</div>
-        <div class="section-heading">Люди <em>за кодом</em></div>
-        <div class="section-sub">Четыре человека — четыре суперсилы.</div>
+        <div class="section-heading">Кто что <em>делает</em></div>
+        <div class="section-sub">Роли условные — на практике все делают понемногу всё.</div>
         <div class="team-row">
             <div class="member">
                 <div class="member-ava">9i</div>
@@ -929,7 +808,7 @@
             <div class="member">
                 <div class="member-ava">ir</div>
                 <div class="member-name">irshino</div>
-                <div class="member-role">Narrativ</div>
+                <div class="member-role">Narrative</div>
             </div>
             <div class="member">
                 <div class="member-ava">g1</div>
@@ -939,37 +818,35 @@
         </div>
     </div>
 </section>
-
 <!-- PHILOSOPHY -->
 <section class="philosophy" id="philosophy">
     <div class="container">
-        <div class="section-label">Философия</div>
-        <div class="section-heading">Во что <em>мы</em> <strong>верим</strong></div>
+        <div class="section-label">Подход</div>
+        <div class="section-heading">Как мы <em>к этому</em> относимся</div>
         <div class="philosophy-items">
             <div class="phil-item">
                 <div class="phil-num">01</div>
-                <div class="phil-title">Игры — это <em>искусство</em></div>
-                <div class="phil-desc">Геймплей, визуал и звук сливаются в единое переживание. Мы создаём опыт, а не продукт.</div>
+                <div class="phil-title">Делаем <em>то, что нравится</em></div>
+                <div class="phil-desc">Работаем над проектами, которые интересны нам самим. Если игра скучная для команды — она вряд ли будет интересной для игроков.</div>
             </div>
             <div class="phil-item">
                 <div class="phil-num">02</div>
-                <div class="phil-title">Маленькая команда — <em>суперсила</em></div>
-                <div class="phil-desc">Четыре человека, мгновенные решения, нулевая бюрократия. Каждый голос слышен.</div>
+                <div class="phil-title">Небольшой <em>масштаб</em></div>
+                <div class="phil-desc">Маленькая команда означает быстрые решения и меньше координации. Каждый знает, кто за что отвечает.</div>
             </div>
             <div class="phil-item">
                 <div class="phil-num">03</div>
-                <div class="phil-title"><em>Gameplay</em> превыше всего</div>
-                <div class="phil-desc">Красивая картинка без механик — это скринсейвер. Мы строим вокруг того, что приносит удовольствие.</div>
+                <div class="phil-title"><em>Механики</em> важнее графики</div>
+                <div class="phil-desc">Красивая картинка не спасёт скучный геймплей. Сначала делаем так, чтобы было интересно играть, потом шлифуем визуал.</div>
             </div>
             <div class="phil-item">
                 <div class="phil-num">04</div>
-                <div class="phil-title">Делаем для <em>себя</em></div>
-                <div class="phil-desc">Мы — наши первые игроки. Если нас не затягивает — значит, нужно копать глубже.</div>
+                <div class="phil-title">Релизим <em>рабочее</em></div>
+                <div class="phil-desc">Лучше выпустить простую, но законченную игру, чем застрять на амбициозном проекте на годы.</div>
             </div>
         </div>
     </div>
 </section>
-
 <!-- TOOLS -->
 <div class="tools-bar">
     <div class="tool"><span class="tool-dot"></span>Unity</div>
@@ -980,16 +857,15 @@
     <div class="tool"><span class="tool-dot"></span>Git</div>
     <div class="tool"><span class="tool-dot"></span>Notion</div>
 </div>
-
 <!-- CONTACT -->
 <section class="contact" id="contact">
     <div class="container">
-        <div class="contact-label">Контакт</div>
+        <div class="contact-label">Контакты</div>
         <div class="contact-heading">
-            Давайте
-            <span class="contact-heading-bold">поговорим</span>
+            Свяжитесь
+            <span class="contact-heading-bold">с нами</span>
         </div>
-        <div class="contact-sub">Идея, коллаборация, или просто привет — мы на связи.</div>
+        <div class="contact-sub">По вопросам сотрудничества или просто чтобы поздороваться.</div>
         <div class="contact-buttons">
             <a href="mailto:itscomrats@gmail.com" class="cbtn cbtn-primary">✉ itscomrats@gmail.com</a>
             <a href="https://t.me/itscomrats" class="cbtn">Telegram</a>
@@ -997,15 +873,13 @@
         </div>
     </div>
 </section>
-
 <!-- FOOTER -->
 <footer>
     <div class="footer-inner">
         <div class="footer-l">© 2026 ComRats</div>
         <div class="footer-c">made with <span>♥</span> and unity</div>
-        <div class="footer-r">indie forever</div>
+        <div class="footer-r">indie gamedev</div>
     </div>
 </footer>
-
 </body>
 </html>
