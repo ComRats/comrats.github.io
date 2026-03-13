@@ -552,12 +552,70 @@
             color: var(--white);
             position: relative;
             overflow: hidden;
-            padding: 0 0 120px;
+            padding: 0 0 140px;
         }
-        /* top connector from hero */
-        .games-section-inner {
-            padding-top: 80px;
+        .games-section-inner { padding-top: 80px; }
+
+        /* Ambient orbs */
+        .games-orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(100px);
+            animation: orb-drift ease-in-out infinite alternate;
         }
+        .games-orb-1 {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(126,202,181,0.08), transparent 70%);
+            top: -150px; right: -200px;
+            animation-duration: 12s;
+        }
+        .games-orb-2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(91,175,152,0.06), transparent 70%);
+            bottom: 50px; left: 10%;
+            animation-duration: 17s;
+            animation-delay: -5s;
+        }
+        .games-orb-3 {
+            width: 250px; height: 250px;
+            background: radial-gradient(circle, rgba(126,202,181,0.05), transparent 70%);
+            top: 40%; left: 40%;
+            animation-duration: 9s;
+            animation-delay: -3s;
+        }
+        @keyframes orb-drift {
+            0%   { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 20px) scale(1.08); }
+        }
+
+        /* Scanline texture overlay */
+        .games-scanlines {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.03) 2px,
+                rgba(0,0,0,0.03) 4px
+            );
+        }
+
+        /* Floating noise dots */
+        .games-noise {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+
+        /* Header */
         .games-header {
             max-width: 1340px;
             margin: 0 auto;
@@ -567,169 +625,239 @@
             justify-content: space-between;
             margin-bottom: 56px;
             gap: 32px;
+            position: relative;
+            z-index: 2;
         }
         .games-section .section-label { color: var(--mint); }
         .games-section .section-label::before { background: var(--mint); }
         .games-section .section-heading { color: var(--white); margin-bottom: 0; }
         .games-section .section-sub { color: rgba(255,255,255,0.3); margin-top: 12px; }
-        /* Floating ambient orbs */
-        .games-orb {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            filter: blur(80px);
-        }
-        .games-orb-1 {
-            width: 500px; height: 500px;
-            background: rgba(126,202,181,0.05);
-            top: -100px; right: -150px;
-        }
-        .games-orb-2 {
-            width: 300px; height: 300px;
-            background: rgba(126,202,181,0.04);
-            bottom: 0; left: 20%;
-        }
-        /* Nav arrows */
-        .games-nav {
-            display: flex;
-            gap: 10px;
-            flex-shrink: 0;
-        }
+
+        /* Arrow nav */
+        .games-nav { display: flex; gap: 10px; flex-shrink: 0; }
         .games-arrow {
-            width: 48px; height: 48px;
+            width: 52px; height: 52px;
             border-radius: 50%;
             border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.03);
             color: rgba(255,255,255,0.5);
             font-size: 1.1rem;
             cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            user-select: none;
-            line-height: 1;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
         }
-        .games-arrow:hover {
-            border-color: rgba(126,202,181,0.4);
-            background: rgba(126,202,181,0.08);
-            color: var(--mint);
-            transform: scale(1.08);
+        .games-arrow::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-mint);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.35s;
         }
+        .games-arrow span { position: relative; z-index: 1; transition: color 0.3s; }
+        .games-arrow:hover::before { opacity: 1; }
+        .games-arrow:hover { border-color: transparent; transform: scale(1.1); }
+        .games-arrow:hover span { color: var(--dark); }
         .games-arrow:active { transform: scale(0.95); }
-        /* Horizontal scroll track */
+
+        /* Track */
         .games-track-wrap {
             position: relative;
+            z-index: 2;
         }
         .games-track-wrap::before,
         .games-track-wrap::after {
             content: '';
             position: absolute;
             top: 0; bottom: 0;
-            width: 120px;
-            z-index: 2;
+            width: 140px;
+            z-index: 3;
             pointer-events: none;
         }
-        .games-track-wrap::before {
-            left: 0;
-            background: linear-gradient(90deg, var(--dark) 20%, transparent);
-        }
-        .games-track-wrap::after {
-            right: 0;
-            background: linear-gradient(-90deg, var(--dark) 20%, transparent);
-        }
+        .games-track-wrap::before { left: 0; background: linear-gradient(90deg, var(--dark) 30%, transparent); }
+        .games-track-wrap::after  { right: 0; background: linear-gradient(-90deg, var(--dark) 30%, transparent); }
         .games-track {
             display: flex;
-            gap: 24px;
-            padding: 20px 80px 40px;
+            gap: 28px;
+            padding: 24px 100px 48px;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
             -ms-overflow-style: none;
             cursor: grab;
+            scroll-snap-type: x mandatory;
         }
         .games-track:active { cursor: grabbing; }
         .games-track::-webkit-scrollbar { display: none; }
-        /* Individual game card */
+
+        /* ── CARD ── */
         .gcard {
             flex-shrink: 0;
-            width: 380px;
-            background: rgba(255,255,255,0.025);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 28px;
-            padding: 0;
+            width: 400px;
+            border-radius: 32px;
             position: relative;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
             cursor: pointer;
+            scroll-snap-align: center;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            transform-style: preserve-3d;
+            /* glass base */
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.07);
         }
         .gcard:hover {
-            border-color: rgba(126,202,181,0.3);
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 60px rgba(126,202,181,0.07);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow:
+                0 40px 100px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(126,202,181,0.25),
+                0 0 80px rgba(126,202,181,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.08);
         }
-        /* Card art area */
+
+        /* 3D tilt effect layer */
+        .gcard-tilt-inner {
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        /* Shimmer sweep on hover */
+        .gcard::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: transform 0.7s ease;
+            z-index: 10;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        .gcard:hover::after { transform: translateX(100%); }
+
+        /* Corner accent */
+        .gcard-corner {
+            position: absolute;
+            top: 16px; right: 16px;
+            width: 40px; height: 40px;
+            z-index: 5;
+        }
+        .gcard-corner::before,
+        .gcard-corner::after {
+            content: '';
+            position: absolute;
+            background: rgba(126,202,181,0.5);
+            border-radius: 2px;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .gcard-corner::before { top: 0; right: 0; width: 2px; height: 16px; }
+        .gcard-corner::after  { top: 0; right: 0; width: 16px; height: 2px; }
+        .gcard:hover .gcard-corner::before { height: 24px; background: var(--mint); }
+        .gcard:hover .gcard-corner::after  { width: 24px;  background: var(--mint); }
+
+        /* ── ART AREA ── */
         .gcard-art {
             width: 100%;
-            height: 220px;
+            height: 240px;
             position: relative;
             overflow: hidden;
         }
-        .gcard-art-bg {
+
+        /* Real cover image */
+        .gcard-cover {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #0d1a16 0%, #0a1410 100%);
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s;
+            filter: brightness(0.75) saturate(1.1);
         }
-        .gcard-art-grid {
+        .gcard:hover .gcard-cover {
+            transform: scale(1.06);
+            filter: brightness(0.9) saturate(1.3);
+        }
+
+        /* Overlay gradient on art */
+        .gcard-art-overlay {
             position: absolute;
             inset: 0;
-            background-image:
-                linear-gradient(rgba(126,202,181,0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(126,202,181,0.06) 1px, transparent 1px);
-            background-size: 32px 32px;
-            opacity: 0.8;
-            transform: perspective(300px) rotateX(20deg) scale(1.3) translateY(10%);
+            background:
+                linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.3) 50%, transparent 100%),
+                linear-gradient(135deg, rgba(126,202,181,0.06) 0%, transparent 60%);
+            z-index: 1;
+            transition: opacity 0.5s;
         }
-        .gcard-art-glow {
+        .gcard:hover .gcard-art-overlay {
+            background:
+                linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.15) 60%, transparent 100%),
+                linear-gradient(135deg, rgba(126,202,181,0.12) 0%, transparent 60%);
+        }
+
+        /* Scanlines on art */
+        .gcard-art-scan {
             position: absolute;
-            width: 200px; height: 200px;
-            border-radius: 50%;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(circle, rgba(126,202,181,0.15) 0%, transparent 70%);
-            transition: all 0.5s;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(0,0,0,0.08) 3px,
+                rgba(0,0,0,0.08) 4px
+            );
+            opacity: 0.5;
         }
-        .gcard:hover .gcard-art-glow {
-            width: 280px; height: 280px;
-            background: radial-gradient(circle, rgba(126,202,181,0.22) 0%, transparent 70%);
+
+        /* CRT vignette */
+        .gcard-art-vignette {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.5) 100%);
         }
-        /* Floating particles in art */
+
+        /* Particles */
         .gcard-particle {
             position: absolute;
             border-radius: 50%;
             background: var(--mint);
             animation: particle-float linear infinite;
             opacity: 0;
+            z-index: 3;
+            box-shadow: 0 0 6px rgba(126,202,181,0.6);
         }
         @keyframes particle-float {
-            0%   { transform: translateY(0) scale(0); opacity: 0; }
-            10%  { opacity: 0.6; transform: scale(1); }
-            90%  { opacity: 0.3; }
-            100% { transform: translateY(-180px) translateX(var(--drift, 20px)) scale(0.3); opacity: 0; }
+            0%   { transform: translateY(0) translateX(0) scale(0); opacity: 0; }
+            8%   { opacity: 0.7; transform: scale(1); }
+            90%  { opacity: 0.2; }
+            100% { transform: translateY(-200px) translateX(var(--drift, 20px)) scale(0.2); opacity: 0; }
         }
-        .gcard-art-title {
+
+        /* Art name overlay */
+        .gcard-art-name-wrap {
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            padding: 48px 32px 24px;
-            background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, transparent 100%);
-            z-index: 1;
+            padding: 32px 28px 20px;
+            z-index: 4;
         }
         .gcard-art-name {
             font-family: 'Unbounded', sans-serif;
-            font-size: 1.9rem;
+            font-size: 2rem;
             font-weight: 900;
             letter-spacing: -2px;
             line-height: 0.95;
             color: var(--white);
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            transform: translateY(4px);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
+        .gcard:hover .gcard-art-name { transform: translateY(0); }
         .gcard-art-name span {
             display: block;
             background: var(--gradient-mint);
@@ -737,9 +865,54 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        /* Card body */
+
+        /* Play button overlay */
+        .gcard-play {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.6);
+            opacity: 0;
+            z-index: 5;
+            width: 64px; height: 64px;
+            border-radius: 50%;
+            background: rgba(126,202,181,0.2);
+            border: 2px solid rgba(126,202,181,0.6);
+            backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .gcard-play::after {
+            content: '';
+            width: 0; height: 0;
+            border-style: solid;
+            border-width: 9px 0 9px 18px;
+            border-color: transparent transparent transparent var(--mint);
+            margin-left: 4px;
+        }
+        .gcard:hover .gcard-play {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* ── CARD BODY ── */
         .gcard-body {
-            padding: 28px 32px 36px;
+            padding: 24px 28px 32px;
+            position: relative;
+        }
+        /* Body texture */
+        .gcard-body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(126,202,181,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .gcard-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
         }
         .gcard-badge {
             display: inline-flex;
@@ -754,53 +927,70 @@
             border: 1px solid rgba(126,202,181,0.18);
             padding: 6px 14px;
             border-radius: 100px;
-            margin-bottom: 20px;
         }
         .gcard-badge-dot {
             width: 4px; height: 4px;
             background: var(--mint);
             border-radius: 50%;
+            box-shadow: 0 0 6px var(--mint);
             animation: badge-pulse 2s ease-in-out infinite;
         }
         @keyframes badge-pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.7); }
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 6px var(--mint); }
+            50% { opacity: 0.4; transform: scale(0.7); box-shadow: 0 0 2px var(--mint); }
         }
+        .gcard-num {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.04);
+            letter-spacing: -3px;
+            line-height: 1;
+            user-select: none;
+            transition: color 0.3s;
+        }
+        .gcard:hover .gcard-num { color: rgba(126,202,181,0.06); }
+
         .gcard-desc {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.05rem;
             font-style: italic;
             font-weight: 300;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255,255,255,0.4);
             line-height: 1.7;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
+            transition: color 0.3s;
         }
+        .gcard:hover .gcard-desc { color: rgba(255,255,255,0.55); }
+
         .gcard-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
         .gcard-tag {
             font-family: 'Outfit', sans-serif;
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             font-weight: 400;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.28);
             border: 1px solid rgba(255,255,255,0.07);
             padding: 4px 12px;
             border-radius: 100px;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .gcard:hover .gcard-tag {
-            color: rgba(126,202,181,0.6);
-            border-color: rgba(126,202,181,0.15);
+            color: rgba(126,202,181,0.7);
+            border-color: rgba(126,202,181,0.2);
+            background: rgba(126,202,181,0.05);
         }
+
         .gcard-footer {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 12px;
         }
         .gcard-link {
             display: inline-flex;
@@ -808,14 +998,14 @@
             gap: 8px;
             text-decoration: none;
             font-family: 'Outfit', sans-serif;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.82rem;
             color: var(--dark);
             background: var(--gradient-mint);
-            padding: 11px 24px;
+            padding: 12px 24px;
             border-radius: 100px;
             transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            box-shadow: var(--shadow-mint);
+            box-shadow: 0 4px 20px rgba(126,202,181,0.25);
             position: relative;
             overflow: hidden;
         }
@@ -823,32 +1013,101 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 60%);
+        }
+        .gcard-link::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0);
+            transition: background 0.3s;
         }
         .gcard-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 32px rgba(126,202,181,0.35);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 10px 36px rgba(126,202,181,0.4);
         }
         .gcard-link span { position: relative; z-index: 1; }
-        .gcard-num {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: rgba(255,255,255,0.04);
-            letter-spacing: -3px;
-            line-height: 1;
-            user-select: none;
+
+        .gcard-itch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 12px 18px;
+            border-radius: 100px;
+            transition: all 0.3s;
         }
-        /* Coming soon card */
-        .gcard-soon {
-            opacity: 0.5;
+        .gcard-itch-btn:hover {
+            color: var(--mint);
+            border-color: rgba(126,202,181,0.3);
+            background: rgba(126,202,181,0.05);
         }
-        .gcard-soon .gcard-art-bg {
-            background: linear-gradient(135deg, #111113 0%, #0d0d0f 100%);
+
+        /* Rating stars */
+        .gcard-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 16px;
         }
-        .gcard-soon .gcard-art-grid { opacity: 0.3; }
-        .gcard-soon .gcard-art-glow {
-            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+        .gcard-star {
+            width: 10px; height: 10px;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            background: var(--mint);
+            opacity: 0.8;
+            transition: all 0.2s;
+        }
+        .gcard-star.empty { background: rgba(255,255,255,0.12); opacity: 1; }
+        .gcard:hover .gcard-star:not(.empty) { background: var(--mint); opacity: 1; filter: drop-shadow(0 0 4px rgba(126,202,181,0.6)); }
+
+        /* Progress bar */
+        .gcard-progress {
+            margin-bottom: 20px;
+        }
+        .gcard-progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .gcard-progress-track {
+            height: 2px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .gcard-progress-fill {
+            height: 100%;
+            background: var(--gradient-mint);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+        .gcard-progress-fill::after {
+            content: '';
+            position: absolute;
+            right: 0; top: -1px;
+            width: 6px; height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(126,202,181,0.8);
+        }
+        .gcard.in-view .gcard-progress-fill { width: var(--progress, 100%); }
+
+        /* coming soon state */
+        .gcard-soon { opacity: 0.45; pointer-events: none; }
+        .gcard-soon .gcard-cover {
+            filter: brightness(0.3) grayscale(1);
         }
         .gcard-soon-label {
             position: absolute;
@@ -858,33 +1117,38 @@
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 4px;
-            color: rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.2);
             text-align: center;
-            z-index: 2;
+            z-index: 5;
+            line-height: 1.8;
         }
-        /* Scroll dots */
+
+        /* Dots */
         .games-dots {
             display: flex;
             gap: 8px;
             justify-content: center;
-            margin-top: 32px;
+            margin-top: 36px;
+            position: relative;
+            z-index: 2;
         }
         .games-dot {
             width: 6px; height: 6px;
             border-radius: 100px;
-            background: rgba(255,255,255,0.15);
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            background: rgba(255,255,255,0.12);
+            transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
             cursor: pointer;
         }
-        .games-dot.active {
-            width: 24px;
-            background: var(--mint);
-        }
+        .games-dot.active { width: 28px; background: var(--mint); box-shadow: 0 0 10px rgba(126,202,181,0.4); }
+        .games-dot:hover:not(.active) { background: rgba(255,255,255,0.25); }
+
         @media (max-width: 768px) {
             .games-header { padding: 0 24px; flex-direction: column; align-items: flex-start; }
             .games-track { padding: 20px 24px 40px; }
-            .gcard { width: 300px; }
-            .gcard-art { height: 180px; }
+            .gcard { width: 310px; }
+            .gcard-art { height: 190px; }
+            .games-track-wrap::before,
+            .games-track-wrap::after { width: 60px; }
         }
 
 /* ═══════════ TEAM ═══════════ */
@@ -1289,6 +1553,9 @@
 <section class="games-section" id="games">
     <div class="games-orb games-orb-1"></div>
     <div class="games-orb games-orb-2"></div>
+    <div class="games-orb games-orb-3"></div>
+    <div class="games-scanlines"></div>
+    <div class="games-noise"></div>
     <div class="games-section-inner">
         <div class="games-header">
             <div>
@@ -1297,103 +1564,139 @@
                 <div class="section-sub">Проекты, которые мы довели до релиза.</div>
             </div>
             <div class="games-nav">
-                <button class="games-arrow" id="games-prev" aria-label="Назад">&#8592;</button>
-                <button class="games-arrow" id="games-next" aria-label="Вперёд">&#8594;</button>
+                <button class="games-arrow" id="games-prev" aria-label="Назад"><span>&#8592;</span></button>
+                <button class="games-arrow" id="games-next" aria-label="Вперёд"><span>&#8594;</span></button>
             </div>
         </div>
         <div class="games-track-wrap">
             <div class="games-track" id="games-track">
 
-                <!-- Card 1: Bela Vezha -->
-                <div class="gcard" onclick="window.open('https://comrats.itch.io/bela-vezha','_blank')">
-                    <div class="gcard-art">
-                        <div class="gcard-art-bg"></div>
-                        <div class="gcard-art-grid"></div>
-                        <div class="gcard-art-glow"></div>
-                        <!-- Particles -->
-                        <div class="gcard-particle" style="width:3px;height:3px;left:20%;bottom:30px;animation-duration:3.2s;animation-delay:0s;--drift:30px"></div>
-                        <div class="gcard-particle" style="width:2px;height:2px;left:40%;bottom:20px;animation-duration:2.8s;animation-delay:0.6s;--drift:-20px"></div>
-                        <div class="gcard-particle" style="width:4px;height:4px;left:65%;bottom:40px;animation-duration:3.6s;animation-delay:1.2s;--drift:15px"></div>
-                        <div class="gcard-particle" style="width:2px;height:2px;left:80%;bottom:25px;animation-duration:2.5s;animation-delay:0.3s;--drift:-35px"></div>
-                        <div class="gcard-particle" style="width:3px;height:3px;left:55%;bottom:15px;animation-duration:4s;animation-delay:1.8s;--drift:25px"></div>
-                        <div class="gcard-art-title">
-                            <div class="gcard-art-name">
-                                Bela<span>Vezha</span>
+                <!-- Card 1: Bela Vezha (REAL COVER) -->
+                <div class="gcard" id="gcard-0">
+                    <div class="gcard-tilt-inner" id="gcard-tilt-0">
+                        <div class="gcard-corner"></div>
+                        <div class="gcard-art">
+                            <div class="gcard-cover" style="background-image:url('https://img.itch.zone/aW1nLzI2MDM0OTY4LnBuZw==/original/1wU5LQ.png')"></div>
+                            <div class="gcard-art-overlay"></div>
+                            <div class="gcard-art-scan"></div>
+                            <div class="gcard-art-vignette"></div>
+                            <div class="gcard-play"></div>
+                            <!-- Particles -->
+                            <div class="gcard-particle" style="width:3px;height:3px;left:18%;bottom:30px;animation-duration:3.4s;animation-delay:0.0s;--drift:28px"></div>
+                            <div class="gcard-particle" style="width:2px;height:2px;left:38%;bottom:22px;animation-duration:2.9s;animation-delay:0.7s;--drift:-22px"></div>
+                            <div class="gcard-particle" style="width:4px;height:4px;left:62%;bottom:38px;animation-duration:3.8s;animation-delay:1.3s;--drift:18px"></div>
+                            <div class="gcard-particle" style="width:2px;height:2px;left:78%;bottom:28px;animation-duration:2.6s;animation-delay:0.4s;--drift:-30px"></div>
+                            <div class="gcard-particle" style="width:3px;height:3px;left:52%;bottom:14px;animation-duration:4.1s;animation-delay:1.9s;--drift:22px"></div>
+                            <div class="gcard-particle" style="width:2px;height:2px;left:30%;bottom:18px;animation-duration:3.0s;animation-delay:2.4s;--drift:-14px"></div>
+                            <div class="gcard-art-name-wrap">
+                                <div class="gcard-art-name">Bela<span>Vezha</span></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="gcard-body">
-                        <div class="gcard-badge">
-                            <span class="gcard-badge-dot"></span>
-                            Доступно
-                        </div>
-                        <div class="gcard-desc">Исследуйте. Выживайте. Откройте тайны башни.</div>
-                        <div class="gcard-tags">
-                            <span class="gcard-tag">Indie</span>
-                            <span class="gcard-tag">Unity</span>
-                            <span class="gcard-tag">2D</span>
-                            <span class="gcard-tag">Free</span>
-                        </div>
-                        <div class="gcard-footer">
-                            <a href="https://comrats.itch.io/bela-vezha" target="_blank" rel="noopener noreferrer" class="gcard-link" onclick="event.stopPropagation()">
-                                <span>Играть →</span>
-                            </a>
-                            <div class="gcard-num">01</div>
+                        <div class="gcard-body">
+                            <div class="gcard-top-row">
+                                <div class="gcard-badge">
+                                    <span class="gcard-badge-dot"></span>
+                                    Доступно сейчас
+                                </div>
+                                <div class="gcard-num">01</div>
+                            </div>
+                            <div class="gcard-stars">
+                                <div class="gcard-star"></div>
+                                <div class="gcard-star"></div>
+                                <div class="gcard-star"></div>
+                                <div class="gcard-star"></div>
+                                <div class="gcard-star empty"></div>
+                            </div>
+                            <div class="gcard-desc">Исследуйте. Выживайте. Откройте тайны башни.</div>
+                            <div class="gcard-progress">
+                                <div class="gcard-progress-label">
+                                    <span>Готовность</span><span>100%</span>
+                                </div>
+                                <div class="gcard-progress-track">
+                                    <div class="gcard-progress-fill" style="--progress:100%"></div>
+                                </div>
+                            </div>
+                            <div class="gcard-tags">
+                                <span class="gcard-tag">Indie</span>
+                                <span class="gcard-tag">Unity</span>
+                                <span class="gcard-tag">2D</span>
+                                <span class="gcard-tag">Free</span>
+                                <span class="gcard-tag">itch.io</span>
+                            </div>
+                            <div class="gcard-footer">
+                                <a href="https://comrats.itch.io/bela-vezha" target="_blank" rel="noopener noreferrer" class="gcard-link" onclick="event.stopPropagation()">
+                                    <span>Играть бесплатно →</span>
+                                </a>
+                                <a href="https://comrats.itch.io/bela-vezha" target="_blank" rel="noopener noreferrer" class="gcard-itch-btn" onclick="event.stopPropagation()">
+                                    <span>itch.io</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 2: Coming Soon -->
-                <div class="gcard gcard-soon">
-                    <div class="gcard-art">
-                        <div class="gcard-art-bg"></div>
-                        <div class="gcard-art-grid"></div>
-                        <div class="gcard-art-glow"></div>
-                        <div class="gcard-soon-label">Скоро<br>···</div>
-                    </div>
-                    <div class="gcard-body">
-                        <div class="gcard-badge" style="color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);">
-                            <span class="gcard-badge-dot" style="background:rgba(255,255,255,0.2);animation:none;"></span>
-                            В разработке
+                <div class="gcard gcard-soon" id="gcard-1">
+                    <div class="gcard-tilt-inner">
+                        <div class="gcard-art">
+                            <div class="gcard-cover" style="background:linear-gradient(135deg,#0d1a16,#0a1410)"></div>
+                            <div class="gcard-art-overlay"></div>
+                            <div class="gcard-art-scan"></div>
+                            <div class="gcard-art-vignette"></div>
+                            <div class="gcard-soon-label">Скоро<br>· · ·</div>
                         </div>
-                        <div class="gcard-desc">Следующий проект уже на стадии прототипа.</div>
-                        <div class="gcard-tags">
-                            <span class="gcard-tag">???</span>
-                            <span class="gcard-tag">Unity</span>
-                            <span class="gcard-tag">TBA</span>
-                        </div>
-                        <div class="gcard-footer">
-                            <div class="gcard-num">02</div>
+                        <div class="gcard-body">
+                            <div class="gcard-top-row">
+                                <div class="gcard-badge" style="color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.06);">
+                                    <span class="gcard-badge-dot" style="background:rgba(255,255,255,0.2);box-shadow:none;animation:none;"></span>
+                                    В разработке
+                                </div>
+                                <div class="gcard-num">02</div>
+                            </div>
+                            <div class="gcard-desc">Следующий проект уже на стадии прототипа.</div>
+                            <div class="gcard-progress">
+                                <div class="gcard-progress-label">
+                                    <span>Готовность</span><span>???</span>
+                                </div>
+                                <div class="gcard-progress-track">
+                                    <div class="gcard-progress-fill" style="--progress:30%;background:rgba(255,255,255,0.1)"></div>
+                                </div>
+                            </div>
+                            <div class="gcard-tags">
+                                <span class="gcard-tag">???</span>
+                                <span class="gcard-tag">Unity</span>
+                                <span class="gcard-tag">TBA</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Card 3: Coming Soon -->
-                <div class="gcard gcard-soon" style="opacity:0.25;">
-                    <div class="gcard-art">
-                        <div class="gcard-art-bg"></div>
-                        <div class="gcard-art-grid" style="opacity:0.15;"></div>
-                        <div class="gcard-art-glow"></div>
-                        <div class="gcard-soon-label" style="color:rgba(255,255,255,0.15);">Скоро<br>···</div>
-                    </div>
-                    <div class="gcard-body">
-                        <div class="gcard-badge" style="color:rgba(255,255,255,0.12);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.04);">
-                            <span class="gcard-badge-dot" style="background:rgba(255,255,255,0.12);animation:none;"></span>
-                            Планируется
+                <!-- Card 3: Future -->
+                <div class="gcard gcard-soon" id="gcard-2" style="opacity:0.2;">
+                    <div class="gcard-tilt-inner">
+                        <div class="gcard-art" style="height:240px;">
+                            <div class="gcard-cover" style="background:#080808"></div>
+                            <div class="gcard-art-scan"></div>
+                            <div class="gcard-soon-label" style="color:rgba(255,255,255,0.1);">???<br>· · ·</div>
                         </div>
-                        <div class="gcard-desc">Идея есть. Времени мало.</div>
-                        <div class="gcard-tags">
-                            <span class="gcard-tag">???</span>
-                        </div>
-                        <div class="gcard-footer">
-                            <div class="gcard-num">03</div>
+                        <div class="gcard-body">
+                            <div class="gcard-top-row">
+                                <div class="gcard-badge" style="color:rgba(255,255,255,0.1);background:transparent;border-color:rgba(255,255,255,0.04);">
+                                    <span style="width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.1);display:inline-block;"></span>
+                                    Планируется
+                                </div>
+                                <div class="gcard-num">03</div>
+                            </div>
+                            <div class="gcard-desc" style="color:rgba(255,255,255,0.15);">Идея есть. Времени мало.</div>
+                            <div class="gcard-tags">
+                                <span class="gcard-tag">???</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-        <!-- Scroll dots -->
         <div class="games-dots" id="games-dots">
             <div class="games-dot active" data-index="0"></div>
             <div class="games-dot" data-index="1"></div>
@@ -1405,54 +1708,82 @@
 (function() {
     const track = document.getElementById('games-track');
     const dots = document.querySelectorAll('.games-dot');
+    const CARD_W = 428;
     let isDown = false, startX, scrollLeft;
 
-    // Arrow nav
+    // Arrow nav with smooth spring
     document.getElementById('games-prev').addEventListener('click', () => {
-        track.scrollBy({ left: -404, behavior: 'smooth' });
+        track.scrollBy({ left: -CARD_W, behavior: 'smooth' });
     });
     document.getElementById('games-next').addEventListener('click', () => {
-        track.scrollBy({ left: 404, behavior: 'smooth' });
+        track.scrollBy({ left: CARD_W, behavior: 'smooth' });
     });
 
     // Drag scroll
     track.addEventListener('mousedown', e => {
         isDown = true;
-        track.style.cursor = 'grabbing';
         startX = e.pageX - track.offsetLeft;
         scrollLeft = track.scrollLeft;
+        track.style.userSelect = 'none';
     });
-    track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; });
-    track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; });
+    window.addEventListener('mouseup', () => { isDown = false; track.style.userSelect = ''; });
     track.addEventListener('mousemove', e => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - track.offsetLeft;
-        track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+        track.scrollLeft = scrollLeft - (x - startX) * 1.6;
     });
 
-    // Touch swipe
-    let touchStartX = 0;
-    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    // Touch
+    let tx = 0;
+    track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchmove', e => {
-        const diff = touchStartX - e.touches[0].clientX;
-        track.scrollLeft += diff * 0.5;
-        touchStartX = e.touches[0].clientX;
+        track.scrollLeft += (tx - e.touches[0].clientX) * 0.6;
+        tx = e.touches[0].clientX;
     }, { passive: true });
 
-    // Dots update
+    // Dots
     track.addEventListener('scroll', () => {
-        const cardW = 404;
-        const idx = Math.round(track.scrollLeft / cardW);
+        const idx = Math.round(track.scrollLeft / CARD_W);
         dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     });
-
-    // Dot click nav
     dots.forEach(dot => {
         dot.addEventListener('click', () => {
-            track.scrollTo({ left: parseInt(dot.dataset.index) * 404, behavior: 'smooth' });
+            track.scrollTo({ left: parseInt(dot.dataset.index) * CARD_W, behavior: 'smooth' });
         });
     });
+
+    // 3D tilt on first card
+    const card = document.getElementById('gcard-0');
+    const inner = document.getElementById('gcard-tilt-0');
+    if (card && inner) {
+        card.addEventListener('mousemove', e => {
+            const r = card.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width  - 0.5;
+            const y = (e.clientY - r.top)  / r.height - 0.5;
+            inner.style.transform = `perspective(800px) rotateY(${x * 10}deg) rotateX(${-y * 8}deg)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            inner.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg)';
+            inner.style.transition = 'transform 0.6s cubic-bezier(0.22,1,0.36,1)';
+        });
+        card.addEventListener('mouseenter', () => {
+            inner.style.transition = 'transform 0.1s linear';
+        });
+    }
+
+    // Card click to itch
+    document.getElementById('gcard-0').addEventListener('click', () => {
+        window.open('https://comrats.itch.io/bela-vezha', '_blank');
+    });
+
+    // IntersectionObserver for progress bar animation
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('in-view');
+        });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.gcard').forEach(c => observer.observe(c));
 })();
 </script>
 
