@@ -575,12 +575,13 @@
         .games-section .section-sub { color: rgba(255,255,255,0.35); }
         .games-layout {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 80px;
             margin-top: 76px;
             align-items: center;
             position: relative;
             z-index: 1;
+            max-width: 700px;
         }
         .game-card {
             background: rgba(255,255,255,0.03);
@@ -916,7 +917,6 @@
             .team-row { grid-template-columns: 1fr 1fr; }
             .phil-item { grid-template-columns: 80px 1fr; }
             .phil-desc { grid-column: 2; }
-            .games-layout { grid-template-columns: 1fr; gap: 56px; }
         }
         @media (max-width: 768px) {
             section { padding: 100px 24px; }
@@ -1102,19 +1102,7 @@
                     <span>Играть на itch.io →</span>
                 </a>
             </div>
-            <!-- Right: embed -->
-            <div class="game-embed-wrapper">
-                <div class="game-embed-label">Страница игры</div>
-                <div class="game-embed-frame">
-                    <iframe
-                        src="https://itch.io/embed/4361597"
-                        width="100%"
-                        height="167"
-                        frameborder="0"
-                        loading="lazy"
-                    ><a href="https://comrats.itch.io/bela-vezha">Bela Vezha by ComRats</a></iframe>
-                </div>
-            </div>
+
         </div>
     </div>
 </section>
