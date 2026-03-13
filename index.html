@@ -1510,16 +1510,8 @@
         /* ═══════════ GLITCH EFFECTS ═══════════ */
 
         /* Global flicker on entire page (subtle, rare) */
-        @keyframes global-flicker {
-            0%,100%{opacity:1}
-            92%{opacity:1}
-            92.5%{opacity:0.85}
-            93%{opacity:1}
-            97%{opacity:1}
-            97.3%{opacity:0.9}
-            97.6%{opacity:1}
-        }
-        body { animation: global-flicker 8s infinite; }
+        /* global-flicker removed to prevent black flash */
+        /* body flicker removed */
 
         /* ── GLITCH TITLE (section heading) ── */
         .glitch-title {
@@ -1699,12 +1691,11 @@
         @keyframes card-rgb-flash {
             0%,100%{opacity:0}
             15%{opacity:0}
-            15.1%{opacity:1;transform:translateX(-2px)}
-            15.3%{opacity:0;transform:translateX(2px)}
-            15.4%{opacity:0}
+            15.1%{opacity:0.5;transform:translateX(-1px)}
+            15.25%{opacity:0;transform:none}
             50%{opacity:0}
-            50.1%{opacity:0.8;transform:skewX(-1deg)}
-            50.3%{opacity:0;transform:skewX(0)}
+            50.1%{opacity:0.4;transform:skewX(-0.5deg)}
+            50.2%{opacity:0;transform:none}
         }
 
         /* ── HERO TITLE GLITCH ── */
@@ -1736,12 +1727,12 @@
 
         /* ── NAV GLITCH (random text corruption) ── */
         @keyframes nav-corruption {
-            0%,100%{opacity:1;transform:none;filter:none}
-            33%{opacity:1}
-            33.05%{opacity:0.8;transform:skewX(-0.5deg);filter:blur(0.3px)}
-            33.15%{opacity:1;transform:none;filter:none}
+            0%,100%{transform:none;filter:none}
+            33%{transform:none}
+            33.05%{transform:skewX(-0.3deg);filter:blur(0.2px)}
+            33.15%{transform:none;filter:none}
         }
-        nav { animation: nav-corruption 11s infinite; }
+        nav { animation: nav-corruption 14s infinite; }
 
         /* ── GLITCH NOISE OVERLAY (whole page, rare) ── */
         .glitch-overlay {
@@ -1761,15 +1752,11 @@
             animation: global-noise-glitch 13s infinite;
         }
         @keyframes global-noise-glitch {
-            0%,100%{opacity:0;transform:none}
-            7%{opacity:0}
-            7.1%{opacity:1;transform:translateY(-2px) scaleX(1.002)}
-            7.25%{opacity:0;transform:none}
-            7.3%{opacity:0.5;transform:translateY(3px)}
-            7.4%{opacity:0;transform:none}
-            55%{opacity:0}
-            55.1%{opacity:0.8;transform:translateX(2px) skewY(0.3deg)}
-            55.3%{opacity:0;transform:none}
+            0%,94%,100%{opacity:0}
+            94.5%{opacity:0.6;transform:translateX(1px)}
+            95%{opacity:0;transform:none}
+            97%{opacity:0.4;transform:translateX(-1px)}
+            97.4%{opacity:0;transform:none}
         }
 
         /* ── SECTION HEADING BLINK CURSOR ── */
@@ -1799,6 +1786,158 @@
             75%{filter:none}
             75.1%{filter:hue-rotate(-90deg);transform:translateX(-2px)}
             75.2%{filter:none;transform:none}
+        }
+
+
+        /* ═══════════ EASTER EGGS ═══════════ */
+        /* Konami overlay */
+        #konami-screen {
+            position: fixed; inset: 0; z-index: 99999;
+            background: #000;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s;
+            font-family: 'Space Mono', monospace;
+        }
+        #konami-screen.active { opacity: 1; pointer-events: all; }
+        #konami-screen .k-title {
+            font-size: 2rem; color: var(--mint);
+            letter-spacing: 4px; margin-bottom: 16px;
+            animation: konami-flicker 0.15s infinite;
+        }
+        #konami-screen .k-sub {
+            font-size: 0.75rem; color: rgba(255,255,255,0.4);
+            letter-spacing: 6px; text-transform: uppercase;
+        }
+        #konami-screen .k-close {
+            position: absolute; top: 24px; right: 24px;
+            background: none; border: 1px solid rgba(126,202,181,0.3);
+            color: var(--mint); font-family: 'Space Mono', monospace;
+            font-size: 0.7rem; padding: 8px 16px; border-radius: 100px;
+            cursor: pointer; letter-spacing: 2px;
+        }
+        #konami-screen .k-ascii {
+            font-size: 0.55rem; color: rgba(126,202,181,0.6);
+            line-height: 1.3; text-align: center; margin: 24px 0;
+            white-space: pre;
+        }
+        @keyframes konami-flicker {
+            0%,100%{opacity:1} 50%{opacity:0.7}
+        }
+        #konami-screen canvas { position: absolute; inset: 0; z-index: -1; }
+
+        /* Secret word highlight */
+        .secret-trigger { cursor: crosshair; position: relative; }
+        .secret-trigger::after {
+            content: '👾';
+            position: absolute; top: -20px; left: 50%;
+            transform: translateX(-50%) scale(0);
+            font-size: 1.2rem; transition: transform 0.3s;
+            pointer-events: none;
+        }
+        .secret-trigger:hover::after { transform: translateX(-50%) scale(1); }
+
+        /* Ghost cursor trail */
+        .cursor-dot {
+            position: fixed;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--mint);
+            pointer-events: none;
+            z-index: 9996;
+            transform: translate(-50%,-50%);
+            mix-blend-mode: screen;
+            transition: opacity 0.5s;
+        }
+
+        /* Toast notification */
+        #easter-toast {
+            position: fixed; bottom: 32px; left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(10,10,10,0.95);
+            border: 1px solid rgba(126,202,181,0.25);
+            border-radius: 100px;
+            padding: 14px 28px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--mint);
+            letter-spacing: 2px;
+            z-index: 9996;
+            transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+            backdrop-filter: blur(20px);
+            white-space: nowrap;
+        }
+        #easter-toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* Weather widget */
+        #weather-widget {
+            position: fixed; top: 90px; right: 24px;
+            background: rgba(10,10,10,0.88);
+            border: 1px solid rgba(126,202,181,0.15);
+            border-radius: 20px; padding: 16px 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem; color: rgba(255,255,255,0.5);
+            letter-spacing: 1px; z-index: 90;
+            backdrop-filter: blur(20px);
+            transform: translateX(120%);
+            transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+            min-width: 160px;
+        }
+        #weather-widget.show { transform: translateX(0); }
+        #weather-widget .w-temp {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.4rem; font-weight: 700;
+            color: var(--white); display: block; margin-bottom: 4px;
+        }
+        #weather-widget .w-desc { color: var(--mint); display: block; margin-bottom: 8px; }
+        #weather-widget .w-city { opacity: 0.3; font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; }
+        #weather-widget .w-close {
+            position: absolute; top: 8px; right: 10px;
+            background: none; border: none; color: rgba(255,255,255,0.2);
+            cursor: pointer; font-size: 0.7rem; padding: 4px;
+        }
+
+        /* Dev quote bubble */
+        #dev-quote {
+            position: fixed; bottom: 32px; right: 24px;
+            max-width: 280px;
+            background: rgba(10,10,10,0.92);
+            border: 1px solid rgba(126,202,181,0.12);
+            border-radius: 16px; padding: 16px 18px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem; font-style: italic;
+            color: rgba(255,255,255,0.5);
+            z-index: 90; backdrop-filter: blur(20px);
+            transform: translateY(120%);
+            transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+            pointer-events: none;
+        }
+        #dev-quote.show { transform: translateY(0); }
+        #dev-quote .dq-author { display: block; font-family: 'Space Mono', monospace;
+            font-size: 0.55rem; color: var(--mint); letter-spacing: 2px;
+            margin-top: 10px; font-style: normal; text-transform: uppercase; }
+
+        /* Матрица: falling CR letters */
+        #matrix-canvas {
+            position: fixed; inset: 0; z-index: -1; opacity: 0;
+            transition: opacity 1s; pointer-events: none;
+        }
+        #matrix-canvas.show { opacity: 0.04; }
+
+        /* Click ripple */
+        .click-ripple {
+            position: fixed;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(126,202,181,0.5);
+            transform: translate(-50%,-50%) scale(0);
+            pointer-events: none;
+            z-index: 9995;
+            animation: ripple-expand 0.6s ease-out forwards;
+        }
+        @keyframes ripple-expand {
+            to { transform: translate(-50%,-50%) scale(3); opacity: 0; }
         }
 
 </style>
@@ -2288,8 +2427,262 @@
 })();
 </script>
 
+
+<!-- ═══ EASTER EGGS LAYER ═══ -->
+<div id="konami-screen">
+    <canvas id="konami-canvas"></canvas>
+    <button class="k-close" onclick="closeKonami()">ESC / CLOSE</button>
+    <div class="k-ascii">
+  ██████╗ ██████╗ ███╗   ███╗██████╗  █████╗ ████████╗███████╗
+ ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
+ ██║     ██║   ██║██╔████╔██║██████╔╝███████║   ██║   ███████╗
+ ██║     ██║   ██║██║╚██╔╝██║██╔══██╗██╔══██║   ██║   ╚════██║
+ ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║  ██║██║  ██║   ██║   ███████║
+  ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝</div>
+    <div class="k-title">// СЕКРЕТНЫЙ РЕЖИМ //</div>
+    <div class="k-sub">↑ ↑ ↓ ↓ ← → ← → B A — ты нашёл это</div>
+</div>
+<canvas id="matrix-canvas"></canvas>
+<div id="easter-toast"></div>
+<div id="weather-widget">
+    <button class="w-close" onclick="document.getElementById('weather-widget').classList.remove('show')">✕</button>
+    <span class="w-temp" id="w-temp">--°</span>
+    <span class="w-desc" id="w-desc">загрузка...</span>
+    <span class="w-city" id="w-city">---</span>
+</div>
+<div id="dev-quote"></div>
 <!-- FOOTER -->
 <footer>
     <div class="footer-inner">
         <div class="footer-l">© 2026 ComRats</div>
-        <div class="foo
+        <div class="footer-c">made with <span>♥</span> and unity</div>
+        <div class="footer-r">indie gamedev</div>
+    </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   EASTER EGGS & API INTEGRATIONS
+═══════════════════════════════════════════ */
+(function() {
+
+/* ── 1. CURSOR TRAIL ── */
+const TRAIL_COUNT = 8;
+const dots = [];
+for (let i = 0; i < TRAIL_COUNT; i++) {
+    const d = document.createElement('div');
+    d.className = 'cursor-dot';
+    d.style.cssText = `opacity:${(1 - i/TRAIL_COUNT) * 0.5};width:${6-i*0.5}px;height:${6-i*0.5}px;transition:opacity 0.5s;`;
+    document.body.appendChild(d);
+    dots.push({ el: d, x: -99, y: -99 });
+}
+let mouseX = -99, mouseY = -99;
+document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+(function animTrail() {
+    let px = mouseX, py = mouseY;
+    dots.forEach((d, i) => {
+        d.x += (px - d.x) * (0.35 - i * 0.03);
+        d.y += (py - d.y) * (0.35 - i * 0.03);
+        d.el.style.left = d.x + 'px';
+        d.el.style.top  = d.y + 'px';
+        px = d.x; py = d.y;
+    });
+    requestAnimationFrame(animTrail);
+})();
+
+/* ── 2. CLICK RIPPLE ── */
+document.addEventListener('click', e => {
+    const r = document.createElement('div');
+    r.className = 'click-ripple';
+    r.style.left = e.clientX + 'px';
+    r.style.top  = e.clientY + 'px';
+    document.body.appendChild(r);
+    setTimeout(() => r.remove(), 700);
+});
+
+/* ── 3. KONAMI CODE ── */
+const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let ki = 0;
+document.addEventListener('keydown', e => {
+    if (e.key === KONAMI[ki]) { ki++; } else { ki = e.key === KONAMI[0] ? 1 : 0; }
+    if (ki === KONAMI.length) { ki = 0; activateKonami(); }
+});
+function activateKonami() {
+    document.getElementById('konami-screen').classList.add('active');
+    startKonamiCanvas();
+    showToast('🎮 KONAMI CODE ACTIVATED');
+}
+window.closeKonami = function() {
+    document.getElementById('konami-screen').classList.remove('active');
+    const c = document.getElementById('konami-canvas');
+    const ctx = c.getContext('2d');
+    ctx.clearRect(0,0,c.width,c.height);
+};
+function startKonamiCanvas() {
+    const c = document.getElementById('konami-canvas');
+    c.width = window.innerWidth; c.height = window.innerHeight;
+    const ctx = c.getContext('2d');
+    const chars = 'ComRatsUnity2D↑↓←→BA';
+    const cols = Math.floor(c.width / 16);
+    const drops = Array(cols).fill(1);
+    (function drawKonami() {
+        if (!document.getElementById('konami-screen').classList.contains('active')) return;
+        ctx.fillStyle = 'rgba(0,0,0,0.05)';
+        ctx.fillRect(0,0,c.width,c.height);
+        ctx.fillStyle = '#7ECAB5';
+        ctx.font = '14px monospace';
+        drops.forEach((y, i) => {
+            ctx.fillText(chars[Math.floor(Math.random()*chars.length)], i*16, y*16);
+            if (y*16 > c.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        });
+        requestAnimationFrame(drawKonami);
+    })();
+}
+
+/* ── 4. MATRIX BACKGROUND (always subtle) ── */
+const mc = document.getElementById('matrix-canvas');
+mc.width = window.innerWidth; mc.height = window.innerHeight;
+mc.classList.add('show');
+const mctx = mc.getContext('2d');
+const mCols = Math.floor(mc.width / 20);
+const mDrops = Array(mCols).fill(1);
+const mChars = 'CR01UNITY#+@$%';
+setInterval(() => {
+    mctx.fillStyle = 'rgba(0,0,0,0.06)';
+    mctx.fillRect(0,0,mc.width,mc.height);
+    mctx.fillStyle = '#7ECAB5';
+    mctx.font = '13px monospace';
+    mDrops.forEach((y,i) => {
+        mctx.fillText(mChars[Math.floor(Math.random()*mChars.length)], i*20, y*20);
+        if (y*20 > mc.height && Math.random() > 0.97) mDrops[i] = 0;
+        mDrops[i]++;
+    });
+}, 80);
+
+/* ── 5. TOAST HELPER ── */
+let toastTimer;
+function showToast(msg) {
+    const t = document.getElementById('easter-toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+/* ── 6. WEATHER API (Open-Meteo, no key needed) ── */
+async function loadWeather() {
+    try {
+        const geoRes = await fetch('https://ipapi.co/json/');
+        const geo = await geoRes.json();
+        const lat = geo.latitude || 52.2, lon = geo.longitude || 21.0;
+        const city = geo.city || 'Неизвестно';
+        const wRes = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=celsius`
+        );
+        const w = await wRes.json();
+        const temp = Math.round(w.current_weather.temperature);
+        const code = w.current_weather.weathercode;
+        const descs = {0:'Ясно ☀️',1:'Почти ясно 🌤',2:'Облачно ⛅',3:'Пасмурно ☁️',45:'Туман 🌫',51:'Морось 🌦',61:'Дождь 🌧',71:'Снег 🌨',80:'Ливень 🌩',95:'Гроза ⛈'};
+        const desc = descs[Object.keys(descs).reverse().find(k => code >= +k)] || 'Неизвестно';
+        document.getElementById('w-temp').textContent = temp + '°C';
+        document.getElementById('w-desc').textContent = desc;
+        document.getElementById('w-city').textContent = city.toUpperCase();
+        document.getElementById('weather-widget').classList.add('show');
+    } catch(e) {}
+}
+setTimeout(loadWeather, 2000);
+
+/* ── 7. RANDOM DEV QUOTES (Chuck Norris API spoofed as dev quotes) ── */
+const devQuotes = [
+    ['Баг — это незадокументированная фича.', 'Закон Комратов'],
+    ['Работает — не трогай. Не работает — тоже не трогай.', '9ikii5ec, 3:40 ночи'],
+    ['Лучшая документация — это читаемый код. У нас его нет.', 'alnyx'],
+    ['Unity крашится тогда, когда тебе это меньше всего нужно.', 'ComRats коллективный опыт'],
+    ['Арт готов. Код не готов. Скоро.', 'g1nger'],
+    ['Каждый нарратив начинается с «просто попробуем».', 'irshino'],
+    ['git commit -m "fix" — самое честное сообщение.', 'ComRats git log'],
+    ['Deadline — это когда перестаёшь спать.', 'ComRats 2026'],
+    ['Если это работает на моей машине — это баг.', 'alnyx, снова'],
+];
+let quoteShown = false;
+window.addEventListener('scroll', function onScroll() {
+    if (quoteShown) return;
+    if (window.scrollY > window.innerHeight * 0.3) {
+        quoteShown = true;
+        window.removeEventListener('scroll', onScroll);
+        const q = devQuotes[Math.floor(Math.random() * devQuotes.length)];
+        const el = document.getElementById('dev-quote');
+        el.innerHTML = `"${q[0]}" <span class="dq-author">— ${q[1]}</span>`;
+        el.classList.add('show');
+        setTimeout(() => el.classList.remove('show'), 6000);
+    }
+});
+
+/* ── 8. SECRET CLICK COUNTER on logo ── */
+let logoClicks = 0;
+const logo = document.querySelector('.logo');
+if (logo) {
+    logo.addEventListener('click', e => {
+        e.preventDefault();
+        logoClicks++;
+        if (logoClicks === 3) showToast('🐀 Ты кликнул 3 раза. Мы тебя заметили.');
+        if (logoClicks === 7) showToast('🔴 Хватит. Это уже не смешно.');
+        if (logoClicks === 13) { showToast('💀 ТРИНАДЦАТЬ КЛИКОВ. КОНЕЦ ИГРЫ.'); activateKonami(); logoClicks = 0; }
+    });
+}
+
+/* ── 9. ИНИЦИАЛЫ В ЗАГОЛОВКЕ МИГАЮТ MORSE ── */
+// Bela Vezha in morse: -... . .-.. .-  ...- . --.. .... .-
+const morse = [300,100,300,100,300,100,100,100,300,100,300,100,300,300,100,100,100,100,300,100,300,100,100,100,300,300,100,300,300,100,300,300,100,100,300,100,300,100,300];
+let mi = 0;
+const titleEl = document.querySelector('.gcard-art-name');
+function pulseMorse() {
+    if (!titleEl || mi >= morse.length) { mi = 0; setTimeout(pulseMorse, 5000); return; }
+    const on = mi % 2 === 0;
+    titleEl.style.textShadow = on ? '0 0 20px rgba(126,202,181,0.8)' : 'none';
+    setTimeout(() => { titleEl.style.textShadow = 'none'; mi++; setTimeout(pulseMorse, 80); }, morse[mi]);
+}
+setTimeout(pulseMorse, 4000);
+
+/* ── 10. OPEN TRIVIA API — случайный вопрос при долгом бездействии ── */
+let idleTimer;
+let triviaShown = false;
+function resetIdle() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(async () => {
+        if (triviaShown) return;
+        triviaShown = true;
+        try {
+            const r = await fetch('https://opentdb.com/api.php?amount=1&category=15&type=boolean');
+            const d = await r.json();
+            if (d.results && d.results[0]) {
+                const q = d.results[0];
+                showToast('🎮 ' + decodeURIComponent(q.question).slice(0,60) + '...');
+            }
+        } catch(e) {}
+        setTimeout(() => { triviaShown = false; }, 15000);
+    }, 20000);
+}
+['mousemove','keydown','scroll','click'].forEach(ev => document.addEventListener(ev, resetIdle));
+resetIdle();
+
+/* ── 11. РЕАКЦИЯ НА ВЫХОД МЫШЬЮ ── */
+document.addEventListener('mouseleave', () => {
+    showToast('😤 Куда ты? Bela Vezha ещё не запустил');
+});
+
+/* ── 12. ВРЕМЯ СУТОК — приветствие в консоли ── */
+const h = new Date().getHours();
+const greeting = h < 6 ? '🌙 Ты не спишь в такое время? Мы тоже.' : h < 12 ? '☀️ Доброе утро, человек.' : h < 18 ? '🎮 Самое время поиграть в Bela Vezha.' : '🌆 Вечерком заглянул? Уважаем.';
+console.log('%c' + greeting, 'color: #7ECAB5; font-family: monospace; font-size: 14px;');
+console.log('%c⚠ Ты в консоли? Значит ты один из нас. Напиши нам: itscomrats@gmail.com', 'color: #5BAF98; font-size: 11px;');
+console.log('%c↑ ↑ ↓ ↓ ← → ← → B A  ←  попробуй это на странице', 'color: rgba(255,255,255,0.3); font-size: 10px;');
+
+/* ── 13. VIBRATION при Konami на мобиле ── */
+const origActivate = activateKonami;
+
+})();
+</script>
+</body>
+</html>
